@@ -1,0 +1,1034 @@
+```html
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicons (¡Coloca esto PRIMERO en el <head>!) -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" href="./images/favicon-32x32.png" sizes="32x32">
+
+  <!-- Título y estilos -->
+  <title data-i18n="meta.title">Portafolio de Edición de Video</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+   /* ===== Reset & Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #111;
+  line-height: 1.6;
+  padding-bottom: 6rem; /* espacio para footer fijo */
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+img, iframe {
+  display: block;
+  max-width: 100%;
+}
+
+/* ===== Navbar ===== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.nav-links a {
+  position: relative;
+  font-weight: 500;
+  padding: 0.25rem 0;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: #0077cc;
+  transition: width 0.3s;
+}
+.nav-links a:hover {
+  color: #0077cc;
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+.btn-language {
+  font-weight: 600;
+  padding: 0.5rem 1rem;         /* espacio interno para forma rectangular */
+  border: 2px solid #0077cc;    /* borde visible para definir el botón */
+  border-radius: 0.5rem;        /* esquinas redondeadas */
+  background: #0077cc;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-language:hover {
+       transform: scale(1.1);
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: #111;
+  transition: 0.3s;
+}
+
+/* ===== Secciones ===== */
+section {
+  padding: 6rem 1rem;
+}
+section + section {
+  border-top: 1px solid #e0e0e0;
+}
+
+/* ===== Home ===== */
+#home {
+  min-height: 100vh;
+  background: url('images/fondo.png') no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  text-align: center;
+}
+#home {
+  position: relative;
+  overflow: hidden;
+}
+#home::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.3);  /* oscurece el fondo sin cambiar paleta */
+  z-index: 0;
+}
+#home > * {
+  position: relative;
+  z-index: 1;
+}
+#home h1 {
+  color: #fff;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 100px;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#home .cta-text {
+  color: #ffffff;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#home .btn-cta {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #0077cc;
+  color: #fff;
+  border-radius: 1rem;
+  transition: background 0.3s;
+  font-weight: bold;
+}
+#home .btn-cta:hover {
+  background: #005fa3;
+}
+
+/* ===== Sobre mí ===== */
+/* ===== Sobre mí (nuevo estilo) ===== */
+#sobre-mi {
+  background: #fff;           /* mantiene color original */
+  padding: 6rem 1rem;
+}
+.sobre-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+.sobre-img-card img {
+  width: 80%;    /* antes era 100%, ahora 80% para reducir 20% */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.sobre-img-card img {
+  width: 70%;                       /* reduce la imagen a la mitad */
+  height: auto;
+  border-radius: 1.5rem;            /* bordes redondeados creando rectángulo */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);  /* sombra alrededor del marco */
+  display: inline-block;
+}
+.sobre-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 40px;
+}
+.sobre-content p {
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  color: #111;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 25px;
+  font-style: italic;
+}
+
+/* Stats cards */
+.sobre-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: #d4d3d3;
+  flex: 1;
+  padding: 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.stat-value {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0077cc;
+}
+.stat-label {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.stat-card:hover {
+    background: #c8c5c5;
+    transform: scale(1.15);
+     transition: ease-in;
+}
+/* Botón en Sobre mí */
+.sobre-content .btn-cta.moved {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #0077cc;
+  color: #fff;
+  border-radius: 1rem;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.sobre-content .btn-cta.moved:hover {
+  background: #005fa3;
+  transform: scale(1.15);
+  transition: ease-in;
+}
+
+/* ==== Responsive ==== */
+@media (max-width: 1024px) {
+  .sobre-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .sobre-content h2 { text-align: center; }
+  .sobre-stats { justify-content: center; }
+}
+
+/* ===== Proyectos ===== */
+#proyectos {
+  background: #f5f5f5;
+}
+#proyectos h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 40px;
+}
+.proyectos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 4rem;
+  max-width: 660px;
+  margin: 0 auto;
+}
+.proyecto {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  /* Transición para el hover de escala */
+  transition: transform 0.3s ease;
+}
+.proyecto:hover {
+  /* Efecto de escala al pasar el mouse */
+  transform: scale(1.05);
+  transition: ease-in;
+}
+.proyecto iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  aspect-ratio: 16/9;
+}
+
+
+/* ===== Precios ===== */
+#precios {
+  background: #f5f5f5;
+}
+#precios h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 40px;
+}
+.planes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.plan-card {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 2rem;
+  transition: transform 0.3s;
+}
+.plan-card:hover {
+  transform: translateY(-5px);
+}
+.plan-card h3 {
+  text-align: center;
+  color: #0077cc;
+  margin-bottom: 1rem;
+  font-size: 30px;
+}
+.plan-card .price {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.plan-card ul {
+  list-style: disc inside;
+  margin-bottom: 1rem;
+}
+.plan-card blockquote {
+  font-style: italic;
+  color: #555;
+  text-align: center;
+}
+
+/* ===== Certificados ===== */
+#certificados {
+  background: #fff;
+}
+#certificados h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 40px;
+}
+.certificados-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.certificado {
+  background: #f9f9f9;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 15px rgba(0,0,0,0.1);
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+.certificado img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.certificado:hover img {
+  transform: scale(1.15);
+}
+
+/* ===== Testimonios ===== */
+#testimonios {
+  background: #f5f5f5;
+}
+#testimonios h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 40px;
+}
+.testimonios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: min-content;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.testimonial-card {
+  display: flex;
+  gap: 1rem;
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+}
+.testimonial-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.testimonial-content strong {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-card:hover {
+    transform: scaleY(1.1);
+    transform: scale(1.1);
+    transition: ease-in;
+}
+
+/* ===== Contacto ===== */
+#contacto {
+  background: #fff;
+}
+#contacto h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 40px;
+}
+.contact-card {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.contact-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.contact-card input,
+.contact-card textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+}
+.contact-card button {
+  padding: 0.75rem;
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.contact-card button:hover {
+  background: #005fa3;
+}
+
+/* ===== Footer ===== */
+footer {
+  display: none;        /* oculto por defecto */
+  background: #333;
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  font-size: 1.1rem;    /* aumenta el tamaño de texto */
+}
+
+footer.visible {
+  display: block;       /* se muestra al activar la clase */
+}
+
+/* Estilo para los enlaces dentro del footer */
+footer a {
+  color: #87ceeb;
+  margin: 0 0.5rem;
+  transition: color 0.3s;
+  font-size: 1.1rem;    /* igual tamaño que el texto */
+}
+
+footer a:hover {
+  color: #0077cc;       /* hover azul */
+}
+
+/* Sólo opacidad */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+}
+
+/* Opacidad + desplaza desde abajo */
+.slide-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.slide-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ===== Responsive Breakpoints ===== */
+@media (max-width: 1024px) {
+  .sobre-contenido { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; flex-direction: column; padding: 1rem; top: 60px; }
+  .nav-links.show { display: flex; }
+  .hamburger { display: flex; }
+}
+@media (max-width: 480px) {
+  section { padding: 4rem 0.5rem; }
+  #home h1 { font-size: 1.8rem; }
+  #home .cta-text { font-size: 1rem; }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo"></div>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" data-i18n="nav.home">Home</a>
+        <a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a>
+        <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
+        <a href="#precios" data-i18n="nav.pricing">Precios</a>
+        <a href="#certificados" data-i18n="nav.certificates">Certificados</a>
+        <a href="#testimonios" data-i18n="nav.testimonials">Testimonios</a>
+        <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+        <button id="lang-toggle" class="btn-language">ES</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home -->
+  <section id="home">
+    <h1 data-i18n="home.title">Bienvenido a mi Portafolio</h1>
+    <p class="cta-text">
+        <span data-i18n="home.cta.line1">¿Listo para potenciar tu contenido?</span><br>
+        <span data-i18n="home.cta.line2">Transformo grabaciones simples en historias llamativas.</span>
+      </p>
+  </section>
+
+  <!-- Sobre mí -->
+<section id="sobre-mi">
+  <div class="sobre-container">
+    <!-- Imagen perfil -->
+    <div class="sobre-img-card">
+      <img src="images/foto de perfil.png" alt="Foto de perfil">
+    </div>
+    <!-- Contenido -->
+    <div class="sobre-content">
+      <h2 data-i18n="about.title">Sobre mí</h2>
+      <p data-i18n="about.text">
+        Soy un profesional audiovisual comprometido, impulsado por la pasión por la innovación y la narrativa. Me mantengo a la vanguardia aprendiendo y experimentando de forma constante con técnicas emergentes, asegurando que cada proyecto se transforme en un contenido visual excepcional.      </p>
+
+      <!-- Estadísticas -->
+      <div class="sobre-stats">
+        <div class="stat-card">
+          <span class="stat-value">1+ </span>
+          <span class="stat-label" data-i18n="stat.years">Años</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">50+ </span>
+          <span class="stat-label" data-i18n="stat.projects">Proyectos</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">24/7 </span>
+          <span class="stat-label" data-i18n="stat.support">Soporte</span>
+        </div>
+      </div>
+
+      <!-- Botón de contacto -->
+      <a href="#contacto" class="btn-cta moved" data-i18n="home.button">Contáctame</a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Proyectos -->
+  <section id="proyectos">
+    <h2 data-i18n="projects.title">Proyectos</h2>
+    <div class="proyectos-grid">
+      <div class="proyecto">
+        <iframe src="https://www.youtube.com/embed/A2SSUChKDLA" allowfullscreen></iframe>
+      </div>
+      <div class="proyecto">
+        <iframe src="https://www.youtube.com/embed/w6Cbno8iY-g" allowfullscreen></iframe>
+      </div>
+      <div class="proyecto">
+        <iframe src="https://www.youtube.com/embed/VEGxYEFk1rg" allowfullscreen></iframe>
+      </div>
+      <div class="proyecto">
+        <iframe src="https://www.youtube.com/embed/Ael-0zgH5AQ" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Precios -->
+  <section id="precios">
+    <h2 data-i18n="pricing.title">Precios</h2>
+    <div class="planes-grid">
+      <div class="plan-card">
+        <h3 data-i18n="plan.basic.name">Básico</h3>
+        <div class="price">US $40/sem</div>
+        <ul>
+          <li data-i18n="plan.basic.item1">3 Reels dinámicos (15–60 seg)</li>
+          <li data-i18n="plan.basic.item2">1 Video largo (10–20 min) </li>
+          <li data-i18n="plan.basic.item3">Corrección de color básico y balance de audio </li>
+          <li data-i18n="plan.basic.item4">Música y efectos libres de derechos</li>
+          <li data-i18n="plan.basic.item5">Transiciones profesionales y subtítulos integrados</li>
+          <li data-i18n="plan.basic.item6">1 corrección gratuita</li>
+        </ul>
+        <blockquote data-i18n="plan.basic.tagline">*Ideal para creadores que buscan dar sus primeros pasos con profesionalismo*</blockquote>
+      </div>
+      <div class="plan-card popular">
+        <h3 data-i18n="plan.standard.name">Estándar</h3>
+        <div class="price">US $80/sem</div>
+        <ul>
+          <li data-i18n="plan.standard.item1">7 Reels de alto impacto (15–60 seg) </li>
+          <li data-i18n="plan.standard.item2">3 Videos largos (10–20 min)  </li>
+          <li data-i18n="plan.standard.item3">Color grading avanzado y motion graphics sencillos</li>
+          <li data-i18n="plan.standard.item4">Storyboard interactivo y guión basico</li>
+          <li data-i18n="plan.standard.item5">Entrega en varios formatos/aspect ratios</li>
+          <li data-i18n="plan.standard.item6">2 correcciones gratuitas</li>
+        </ul>
+        <blockquote data-i18n="plan.standard.tagline">*Para marcas que quieren escalar y mantener un flujo constante de contenidos.*</blockquote>
+      </div>
+      <div class="plan-card">
+        <h3 data-i18n="plan.premium.name">Premium</h3>
+        <div class="price">US $180/sem</div>
+        <ul>
+          <li data-i18n="plan.premium.item1">14 Reels creativos (15–60 seg)</li>
+          <li data-i18n="plan.premium.item2">7 Videos largos (10–20 min) </li>
+          <li data-i18n="plan.premium.item3">Storyboard interactivo y guion profesional</li>
+          <li data-i18n="plan.premium.item4">Color grading cinematográfico y mezcla de audio premium </li>
+          <li data-i18n="plan.premium.item5">Optimización de videos para motores de búsqueda </li>
+          <li data-i18n="plan.premium.item6">correcciones ilimitadas</li>
+        </ul>
+        <blockquote data-i18n="plan.premium.tagline">*El combo definitivo para lanzamientos, campañas y escalado rápido*</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificados -->
+  <section id="certificados">
+    <h2 data-i18n="certificates.title">Certificados</h2>
+    <div class="certificados-grid">
+      <div class="certificado">
+        <a href="images/Certicate Cursa.jpg" target="_blank">
+          <img src="images/Certicate Cursa.jpg" alt="Certicate Cursa">
+        </a>
+      </div>
+      <div class="certificado">
+        <a href="images/certificate of social marketing.png" target="_blank">
+          <img src="images/certificate of social marketing.png" alt="Certificate of Social Marketing">
+        </a>
+      </div>
+      <div class="certificado">
+        <a href="images/content marketing.png" target="_blank">
+          <img src="images/content marketing.png"  alt="Certificate Content Marketing">
+        </a>
+      </div>
+      <div class="certificado">
+        <a href="images/EF SET Certificate.jpg" target="_blank">
+          <img src="images/EF SET Certificate.jpg" alt="EF SET Certificate">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section id="testimonios">
+    <h2 data-i18n="testimonials.title">Testimonios</h2>
+    <div class="testimonios-grid">
+      <div class="testimonial-card">
+        <img src="images/Testimonio 1.png" alt="Marcos Rivas">
+        <div class="testimonial-content">
+          <strong data-i18n="testimonial.1.name">Marcos Rivas</strong>
+          <p data-i18n="testimonial.1.text">
+            Me ayudó a darle un look profesional a mi canal de YouTube. Desde las transiciones hasta el color, todo se ve más fluido y atractivo. Muy recomendable.
+          </p>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/Testimonio 2.png" alt="Tomás Herrera">
+        <div class="testimonial-content">
+          <strong data-i18n="testimonial.2.name">Tomás Herrera</strong>
+          <p data-i18n="testimonial.2.text">
+            Mis vlogs ahora se ven como mini documentales. El ritmo, las animaciones, todo está hecho con muchísimo cuidado. Me encantó el resultado.
+          </p>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <img src="images/Testimonio 3.png" alt="Lucía Benítez">
+        <div class="testimonial-content">
+          <strong data-i18n="testimonial.3.name">Lucía Benítez</strong>
+          <p data-i18n="testimonial.3.text">
+            Mi TikTok empezó a crecer desde que mis clips tienen ediciones llamativas y limpias. Se nota el esfuerzo y la creatividad en cada detalle.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+
+  <!-- Contacto -->
+  <section id="contacto">
+    <h2 data-i18n="contact.title">Contacto</h2>
+    <div class="contact-card">
+      <form 
+        id="contactForm" 
+        action="https://formsubmit.co/amesaedits01@gmail.com" 
+        method="POST"
+      >
+        <!-- Añade este input oculto para personalizar el asunto del correo -->
+        <input type="hidden" name="_subject" value="Nuevo mensaje desde tu portafolio">
+        
+        <input
+          type="text"
+          name="name"
+          placeholder="Nombre"
+          data-i18n-placeholder="contact.placeholder.name"
+          required
+        >
+        <input
+          type="email"
+          name="email"
+          placeholder="Correo"
+          data-i18n-placeholder="contact.placeholder.email"
+          required
+        >
+        <textarea
+          name="message"
+          rows="4"
+          placeholder="Mensaje"
+          data-i18n-placeholder="contact.placeholder.message"
+          required
+        ></textarea>
+        <button type="submit" data-i18n="contact.button">Enviar</button>
+      </form>
+    </div>
+  </section>
+  
+
+  <!-- Footer -->
+  <footer>
+    <p data-i18n="footer.copy">&copy; 2025 Amesa Edits. Todos los derechos reservados.</p>
+    <p>
+        <a href="https://x.com/AllenWesa84512" data-i18n="footer.twitter">Twitter</a> |
+        <a href="https://www.linkedin.com/in/ariel-mesa-a3229b351"" data-i18n="footer.linkedin">LinkedIn</a> |
+        <!-- <a href="https://www.instagram.com/amesa_edits?igsh=ejBhcWt2MXo1MDdn" data-i18n="footer.instagram">Instagram</a> | -->
+        <a href="https://wa.me/19782377542" target="_blank" data-i18n="footer.whatsapp">WhatsApp</a> |
+        <a href="https://t.me/amesaedits" target="_blank">Telegram</a>
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Responsive menu
+    const ham = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    ham.addEventListener('click', () => navLinks.classList.toggle('show'));
+  
+    // Language toggle + placeholder update
+    const btnLang = document.getElementById('lang-toggle');
+    const translations = {
+      es: {
+        "meta.title": "Portafolio de Edición de Video",
+        "nav.home": "Home",
+        "nav.about": "Sobre mí",
+        "nav.projects": "Proyectos",
+        "nav.pricing": "Precios",
+        "nav.certificates": "Certificados",
+        "nav.testimonials": "Testimonios",
+        "nav.contact": "Contacto",
+        "home.title": "Bienvenido a mi Portafolio",
+        "home.cta.line1": "¿Listo para potenciar tu contenido?",
+        "home.cta.line2": "Transformo grabaciones simples en historias llamativas.",
+        "home.button": "Contáctame",
+        "about.title": "Sobre mí",
+        "about.text": "Soy un profesional audiovisual comprometido, impulsado por la pasión por la innovación y la narrativa. Me mantengo a la vanguardia aprendiendo y experimentando de forma constante con técnicas emergentes, asegurando que cada proyecto se transforme en un contenido visual excepcional.",
+        "stat.years" : "Años",
+        "stat.projects" : "Proyectos",
+        "stat.support" : "Soporte",
+        "projects.title": "Proyectos",
+        "pricing.title": "Precios",
+        "plan.basic.name": "Básico",
+        "plan.basic.item1": "3 Reels dinámicos (15–60 seg)",
+        "plan.basic.item2": "1 Video largo",
+        "plan.basic.item3": "Corrección de color básico y balance de audio",
+        "plan.basic.item4": "Música y efectos libres de derechos",
+        "plan.basic.item5": "Transiciones profesionales y subtítulos integrados",
+        "plan.basic.item6": "1 corrección gratuita por video",
+        "plan.basic.tagline": "*Ideal para creadores que buscan dar sus primeros pasos con profesionalismo*",
+        "plan.standard.name": "Estándar",
+        "plan.standard.item1": "7 Reels de alto impacto (15–60 seg)",
+        "plan.standard.item2": "3 Videos largos (10–20 min)",
+        "plan.standard.item3": "Color grading avanzado y motion graphics sencillos",
+        "plan.standard.item4": "Storyboard interactivo y guión basico",
+        "plan.standard.item5": "Entrega en varios formatos/aspect ratios",
+        "plan.standard.item6": "2 correcciones gratuitas por video",
+        "plan.standard.tagline": "*Para marcas que quieren escalar y mantener un flujo constante de contenidos*",
+        "plan.premium.name": "Premium",
+        "plan.premium.item1": "14 Reels creativos (15–60 seg)",
+        "plan.premium.item2": "7 Videos largos (10–20 min)",
+        "plan.premium.item3": "Storyboard interactivo y guion profesional",
+        "plan.premium.item4": "Color grading cinematográfico y mezcla de audio premium",
+        "plan.premium.item5": "Optimización de videos para motores de búsqueda",
+        "plan.premium.item6": "correcciones ilimitadas",
+        "plan.premium.tagline": "*El combo definitivo para lanzamientos, campañas y escalado rápido*",
+        "certificates.title": "Certificados",
+        "testimonials.title": "Testimonios",
+        "testimonials.title": "Testimonios",
+        "testimonial.1.name": "Marcos Rivas",
+        "testimonial.1.text": "Me ayudó a darle un look profesional a mi canal de YouTube. Desde las transiciones hasta el color, todo se ve más fluido y atractivo. Muy recomendable.",
+        "testimonial.2.name": "Tomás Herrera",
+        "testimonial.2.text": "Mis vlogs ahora se ven como mini documentales. El ritmo, las animaciones, todo está hecho con muchísimo cuidado. Me encantó el resultado.",
+        "testimonial.3.name": "Lucía Benítez",
+        "testimonial.3.text": "Mi TikTok empezó a crecer desde que mis clips tienen ediciones llamativas y limpias. Se nota el esfuerzo y la creatividad en cada detalle.",
+        "contact.title": "Contacto",
+        "contact.button": "Enviar",
+        "contact.placeholder.name": "Nombre",
+        "contact.placeholder.email": "Correo",
+        "contact.placeholder.message": "Mensaje",
+        "contact.success": "¡Mensaje enviado con éxito!",
+        "footer.copy": "© 2025 Amesa Edits. Todos los derechos reservados.",
+        "footer.twitter": "Twitter",
+        "footer.linkedin": "LinkedIn",
+        "footer.instagram": "Instagram",
+        "footer.whatsapp": "WhatsApp"
+      },
+      en: {
+        "meta.title": "Video Editing Portfolio",
+        "nav.home": "Home",
+        "nav.about": "About Me",
+        "nav.projects": "Projects",
+        "nav.pricing": "Pricing",
+        "nav.certificates": "Certificates",
+        "nav.testimonials": "Testimonials",
+        "nav.contact": "Contact",
+        "home.title": "Welcome to My Portfolio",
+        "home.cta.line1": "Ready to power up your content?",
+        "home.cta.line2": "I turn raw footage into captivating stories.",
+        "home.button": "Contact Me",
+        "about.title": "About Me",
+        "about.text": "I am a committed audiovisual professional driven by a passion for innovation and storytelling. I stay at the forefront by continuously learning and experimenting with emerging techniques, ensuring that every project is transformed into exceptional visual content.",
+        "stat.years" : "Years",
+        "stat.projects" : "Proyects",
+        "stat.support" : "Support",
+        "projects.title": "Projects",
+        "pricing.title": "Pricing",
+        "plan.basic.name": "Basic",
+        "plan.basic.item1": "3 dynamic reels (15–60 sec)",
+        "plan.basic.item2": "1 long video (10–20 min)",
+        "plan.basic.item3": "Basic color correction and audio balancing",
+        "plan.basic.item4": "Royalty-free music and sound effects",
+        "plan.basic.item5": "Professional transitions and integrated captions",
+        "plan.basic.item6": "1 free revision per video",
+        "plan.basic.tagline": "*Ideal for creators seeking to take their first steps with professionalism.*",
+        "plan.standard.name": "Standard",
+        "plan.standard.item1": "7 high-impact reels (15–60 sec)",
+        "plan.standard.item2": "3 long videos (10–20 min)",
+        "plan.standard.item3": "Advanced color grading and simple motion graphics",
+        "plan.standard.item4": "Interactive storyboard and basic script",
+        "plan.standard.item5": "Delivery in multiple formats/aspect ratios",
+        "plan.standard.item6": "2 free revisions per video",
+        "plan.standard.tagline": "*For brands that want to scale and maintain a steady content flow.*",
+        "plan.premium.name": "Premium",
+        "plan.premium.item1": "14 creative reels (15–60 sec)",
+        "plan.premium.item2": "7 long videos (10–20 min)",
+        "plan.premium.item3": "Interactive storyboard and professional script",
+        "plan.premium.item4": "Cinematic color grading and premium audio mixing</li>",
+        "plan.premium.item5": "Video optimization for search engines",
+        "plan.premium.item6": "Unlimited revisions",
+        "plan.premium.tagline": "*The ultimate combo for launches, campaigns, and rapid scaling*",
+        "certificates.title": "Certificates",
+        "testimonials.title": "Testimonials",
+        "testimonial.1.name": "Marcos Rivas",
+        "testimonial.1.text": "He helped give my YouTube channel a professional look. From transitions to color, everything flows more smoothly and looks more attractive. Highly recommended.",
+        "testimonial.2.name": "Tomás Herrera",
+        "testimonial.2.text": "My vlogs now look like mini-documentaries. The pacing, the animations—everything is crafted with utmost care. I loved the result.",
+        "testimonial.3.name": "Lucía Benítez",
+        "testimonial.3.text": "My TikTok started growing once my clips had clean, eye-catching edits. You can see the effort and creativity in every detail.",
+        "contact.title": "Contact",
+        "contact.button": "Send",
+        "contact.placeholder.name": "Name",
+        "contact.placeholder.email": "Email",
+        "contact.placeholder.message": "Message",
+        "contact.success": "Message sent successfully!",
+        "footer.copy": "© 2025 Amesa Edits. All rights reserved.",
+        "footer.twitter": "Twitter",
+        "footer.linkedin": "LinkedIn",
+        "footer.instagram": "Instagram",
+        "footer.whatsapp": "WhatsApp"
+      }
+    };
+  
+    // Determine current language
+    let current = document.documentElement.lang || 'es';
+    btnLang.textContent = current.toUpperCase();
+  
+    // Function to update all text and placeholders
+    function updateText() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = translations[current][key] || el.textContent;
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        el.placeholder = translations[current][key] || el.placeholder;
+      });
+    }
+  
+    // Toggle language on button click
+    btnLang.addEventListener('click', () => {
+      current = current === 'es' ? 'en' : 'es';
+      document.documentElement.lang = current;
+      btnLang.textContent = current.toUpperCase();
+      updateText();
+    });
+  
+    // Initialize text on page load
+    updateText();
+  
+    </script>  
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const footer = document.querySelector('footer');
+          const contactSection = document.getElementById('contacto');
+      
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                footer.classList.add('visible');
+              } else {
+                footer.classList.remove('visible');
+              }
+            });
+          }, { threshold: 0.1 });
+      
+          observer.observe(contactSection);
+        });
+      </script>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          // 1) Observer genérico
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1 });
+        
+          // 2) Para cada sección, separo textos (slide-in) de tarjetas (fade-in)
+          document.querySelectorAll('section').forEach(section => {
+            // Textos con slide-in
+            const slideItems = section.querySelectorAll('h1, h2, p');
+            slideItems.forEach((el, i) => {
+              el.classList.add('slide-in');
+              el.style.transitionDelay = `${i * 100}ms`;
+              observer.observe(el);
+            });
+        
+            // Tarjetas con fade-in (sin transform)
+            const fadeItems = section.querySelectorAll('.proyecto, .plan-card, .certificado, .testimonial-card, .contact-card');
+            fadeItems.forEach((el, i) => {
+              el.classList.add('fade-in');
+              el.style.transitionDelay = `${i * 100}ms`;
+              observer.observe(el);
+            });
+          });
+        
+          // 3) Al clicar en nav, revelo inmediatamente la sección y hago scroll
+          document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+              e.preventDefault();
+              const target = document.querySelector(link.getAttribute('href'));
+              target.scrollIntoView({ behavior: 'smooth' });
+        
+              // Revelar de golpe
+              target.querySelectorAll('.slide-in, .fade-in').forEach(el => {
+                el.classList.add('visible');
+              });
+            });
+          });
+        });
+        </script>
+        
+      
+        
+</body>
+</html>
+```
