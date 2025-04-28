@@ -751,7 +751,7 @@ footer a:hover {
       <!-- Formulario que envía al iframe -->
       <form
         id="contactForm"
-        action="https://script.google.com/macros/s/AKfycbz2oSdCMUyaERkjXMZ7SobGBOev5kXAsEtkjF74kKnlp6oPEmnHQcPCk0UGvao_VdY4/exec"
+        action="https://script.google.com/macros/s/AKfycby1laitr9i5qk7ugeGpa7Kz6V7ENnoAZN4pBnFmxA0ETZFXMfJQHy6EFSD__PTh14Tw/exec"
         method="POST"
         target="hidden_iframe"
       >
@@ -985,7 +985,7 @@ footer a:hover {
         // Detecta fin de envío en el iframe
         iframe.addEventListener('load', () => {
           if (!isSubmitting) return;
-          responseEl.textContent = '¡Mensaje enviado correctamente!';
+          responseEl.textContent = '¡Message sent successfully!';
           responseEl.className   = 'form-response success';
           form.reset();
           isSubmitting = false;
@@ -999,13 +999,13 @@ footer a:hover {
     
           // Validación básica
           if (!nameVal || !emailVal || !messageVal) {
-            responseEl.textContent = 'Por favor, rellena todos los campos.';
+            responseEl.textContent = 'Please fill in all fields';
             responseEl.className   = 'form-response error';
             e.preventDefault();
             return;
           }
           if (!emailRx.test(emailVal)) {
-            responseEl.textContent = 'El correo electrónico no es válido.';
+            responseEl.textContent = 'The email address is not valid.';
             responseEl.className   = 'form-response error';
             e.preventDefault();
             return;
@@ -1013,7 +1013,7 @@ footer a:hover {
     
           // Preparar envío
           isSubmitting           = true;
-          responseEl.textContent = 'Enviando…';
+          responseEl.textContent = 'Sending...';
           responseEl.className   = 'form-response';
           // No preventDefault: el form se envía al iframe
         });
