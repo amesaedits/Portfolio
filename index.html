@@ -89,7 +89,11 @@ nav {
   cursor: pointer;
   color: #fff;
   transition: background-color 0.3s, color 0.3s;
+  display: inline-flex !important;    /* fuerza que siempre esté visible */
+  align-items: center;
+  z-index: 1001;                       /* por encima del dropdown móvil */
 }
+
 
 .btn-language:hover {
        transform: scale(1.1);
@@ -537,7 +541,58 @@ footer a:hover {
 @media (max-width: 1024px) {
   .sobre-contenido { grid-template-columns: 1fr; }
 }
+
 @media (max-width: 768px) {
+  /* ===== Contenedor: logo a la izquierda, hamburger + idioma a la derecha ===== */
+  .nav-container {
+    display: flex;
+    align-items: center;
+  }
+
+  /* ===== Enlaces ocultos y preparado como dropdown ===== */
+  .nav-links {
+    display: none;                             /* oculto por defecto */
+    position: absolute;                        /* flotando sobre el contenido */
+    top: 60px;                                 /* justo debajo del nav */
+    right: 1rem;                               /* deja espacio a la derecha */
+    background: rgba(255, 255, 255, 0.7);      /* fondo blanco al 70% */
+    max-width: fit-content;                    /* se ajusta al contenido */
+    border-radius: 0.5rem;                     /* esquinas redondeadas */
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: opacity 0.3s ease;
+    z-index: 999;                              /* debajo del botón de idioma */
+  }
+
+  /* ===== Dropdown visible ===== */
+  .nav-links.show {
+    display: flex;
+    opacity: 1;
+  }
+
+  /* ===== Espaciado de los enlaces dentro del dropdown ===== */
+  .nav-links a {
+    padding: 0.75rem 20px;                     /* 20px horizontales */
+    width: 100%;                               /* toda el área clicable */
+  }
+
+  /* ===== Icono de hamburguesa ===== */
+  .hamburger {
+    display: flex;                             /* se muestra solo en móvil */
+    cursor: pointer;
+    margin-left: auto;                         /* lo empuja a la derecha */
+  }
+
+  /* ===== Botón de cambio de idioma siempre visible ===== */
+  .btn-language {
+    display: inline-flex !important;           /* forzar visibilidad */
+    align-items: center;
+    margin-left: 0.5rem;                       /* separación mínima */
+    z-index: 1001;                             /* por encima del dropdown */
+  }
+}
+
+/* @media (max-width: 768px) {
   .nav-links { display: none; flex-direction: column; padding: 1rem; top: 60px; }
   .nav-links.show { display: flex; }
   .hamburger { display: flex; }
@@ -546,7 +601,7 @@ footer a:hover {
   section { padding: 4rem 0.5rem; }
   #home h1 { font-size: 1.8rem; }
   #home .cta-text { font-size: 1rem; }
-}
+} */
 
   </style>
 </head>
@@ -799,11 +854,12 @@ footer a:hover {
 
   <!-- Scripts -->
   <script>
+  document.addEventListener('DOMContentLoaded', () => {
     // Responsive menu
     const ham = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     ham.addEventListener('click', () => navLinks.classList.toggle('show'));
-  
+
     // Language toggle + placeholder update
     const btnLang = document.getElementById('lang-toggle');
     const translations = {
@@ -839,7 +895,7 @@ footer a:hover {
         "plan.standard.item1": "7 Reels de alto impacto (15–60 seg)",
         "plan.standard.item2": "3 Videos largos (10–20 min)",
         "plan.standard.item3": "Color grading avanzado y motion graphics sencillos",
-        "plan.standard.item4": "Storyboard interactivo y guión basico",
+        "plan.standard.item4": "Storyboard interactivo y guión básico",
         "plan.standard.item5": "Entrega en varios formatos/aspect ratios",
         "plan.standard.item6": "2 correcciones gratuitas por video",
         "plan.standard.tagline": "*Para marcas que quieren escalar y mantener un flujo constante de contenidos*",
@@ -849,10 +905,9 @@ footer a:hover {
         "plan.premium.item3": "Storyboard interactivo y guion profesional",
         "plan.premium.item4": "Color grading cinematográfico y mezcla de audio premium",
         "plan.premium.item5": "Optimización de videos para motores de búsqueda",
-        "plan.premium.item6": "correcciones ilimitadas",
+        "plan.premium.item6": "Correcciones ilimitadas",
         "plan.premium.tagline": "*El combo definitivo para lanzamientos, campañas y escalado rápido*",
         "certificates.title": "Certificados",
-        "testimonials.title": "Testimonios",
         "testimonials.title": "Testimonios",
         "testimonial.1.name": "Marcos Rivas",
         "testimonial.1.text": "Me ayudó a darle un look profesional a mi canal de YouTube. Desde las transiciones hasta el color, todo se ve más fluido y atractivo. Muy recomendable.",
@@ -888,7 +943,7 @@ footer a:hover {
         "about.title": "About Me",
         "about.text": "I am a committed audiovisual professional driven by a passion for innovation and storytelling. I stay at the forefront by continuously learning and experimenting with emerging techniques, ensuring that every project is transformed into exceptional visual content.",
         "stat.years" : "Years",
-        "stat.projects" : "Proyects",
+        "stat.projects" : "Projects",
         "stat.support" : "Support",
         "projects.title": "Projects",
         "pricing.title": "Pricing",
@@ -912,7 +967,7 @@ footer a:hover {
         "plan.premium.item1": "14 creative reels (15–60 sec)",
         "plan.premium.item2": "7 long videos (10–20 min)",
         "plan.premium.item3": "Interactive storyboard and professional script",
-        "plan.premium.item4": "Cinematic color grading and premium audio mixing</li>",
+        "plan.premium.item4": "Cinematic color grading and premium audio mixing",
         "plan.premium.item5": "Video optimization for search engines",
         "plan.premium.item6": "Unlimited revisions",
         "plan.premium.tagline": "*The ultimate combo for launches, campaigns, and rapid scaling*",
@@ -937,43 +992,54 @@ footer a:hover {
         "footer.whatsapp": "WhatsApp"
       }
     };
-  
-    // Determine current language
+
+    // Detect initial language
     let current = document.documentElement.lang || 'es';
+    document.documentElement.lang = current;
     btnLang.textContent = current.toUpperCase();
-  
-    // Function to update all text and placeholders
+
+    // Update all texts/placeholders
     function updateText() {
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        el.textContent = translations[current][key] || el.textContent;
+        if (translations[current][key]) {
+          el.textContent = translations[current][key];
+        }
       });
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
-        el.placeholder = translations[current][key] || el.placeholder;
+        if (translations[current][key]) {
+          el.placeholder = translations[current][key];
+        }
       });
     }
-  
-  
-    </script>  
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const footer = document.querySelector('footer');
-          const contactSection = document.getElementById('contacto');
-      
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                footer.classList.add('visible');
-              } else {
-                footer.classList.remove('visible');
-              }
-            });
-          }, { threshold: 0.1 });
-      
-          observer.observe(contactSection);
+
+    // Language toggle handler
+    btnLang.addEventListener('click', () => {
+      current = (current === 'es' ? 'en' : 'es');
+      document.documentElement.lang = current;
+      btnLang.textContent = current.toUpperCase();
+      updateText();
+    });
+
+    // Initial text fill
+    updateText();
+
+
+    // Footer visibility on scroll
+    const footer = document.querySelector('footer');
+    const contactSection = document.getElementById('contacto');
+    if (footer && contactSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          footer.classList.toggle('visible', entry.isIntersecting);
         });
-      </script>
+      }, { threshold: 0.1 });
+      observer.observe(contactSection);
+    }
+  });
+</script>
+
      
      <script>
       (function(){
