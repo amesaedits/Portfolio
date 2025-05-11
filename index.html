@@ -247,7 +247,7 @@ section + section {
 }
 
 .stat-card:hover {
-    background: #c8c5c5;
+    background: #71e7ff;
     transform: scale(1.15);
      transition: ease-in;
 }
@@ -278,92 +278,220 @@ section + section {
 }
 
 /* ===== Proyectos ===== */
+/* ===== Proyectos – Tamaño fijo para mejor control de escala y espacio ===== */
 #proyectos {
-  background: #f5f5f5;
+  background: linear-gradient(135deg, #dff6ff 0%, #ffffff 100%);
+  padding: 3rem 1rem;
 }
+
 #proyectos h2 {
+  display: block;
+  margin: 0 auto 2rem;
   text-align: center;
-  margin-bottom: 2rem;
+  color: #0077cc;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 40px;
+  font-size: 3rem;
+  position: relative;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
+#proyectos h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  border-radius: 4px;
+  color: #0077cc;
+}
+
+/* Grid con medidas fijas */
 .proyectos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 4rem;
-  max-width: 660px;
+  grid-template-columns: repeat(2, 300px); /* tarjetas de 300px */
+  gap: 70px; /* separación más controlada entre ellas */
+  justify-content: center;
   margin: 0 auto;
 }
+
+/* Tarjetas con escala controlada */
 .proyecto {
-  background: #fff;
+  width: 300px;
+  height: 400px;
+  background: #ffffff;
   border-radius: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   overflow: hidden;
-  aspect-ratio: 3/4;
-  /* Transición para el hover de escala */
-  transition: transform 0.3s ease;
+  position: relative;
+  transform: scale(1); /* escala base 100% */
+  transform-origin: top center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.proyecto::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(45deg, #00bcd4, #0077cc);
+  z-index: -1;
+  filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+}
+.proyecto:hover::before {
+  opacity: 1;
 }
 .proyecto:hover {
-  /* Efecto de escala al pasar el mouse */
-  transform: scale(1.05);
-  transition: ease-in;
+  transform: scale(1.20); /* escala más precisa en hover */
+  box-shadow: 0 16px 40px rgba(0, 119, 204, 0.25);
 }
+
+/* Iframe con máscara suave */
 .proyecto iframe {
   width: 100%;
   height: 100%;
   border: none;
-  aspect-ratio: 16/9;
+  mask-image: linear-gradient(to bottom, black 85%, transparent);
+  transition: mask-image 0.3s ease;
+}
+.proyecto:hover iframe {
+  mask-image: none;
+}
+
+/* Responsive – columna única */
+@media (max-width: 768px) {
+  #proyectos h2 {
+    font-size: 2.2rem;
+  }
+  .proyectos-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .proyecto {
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    transform: scale(1);
+  }
+  .proyecto:hover {
+    transform: scale(1.05);
+  }
 }
 
 
-/* ===== Precios ===== */
-#precios {
-  background: #f5f5f5;
-}
-#precios h2 {
+
+/* ===== Servicios (Fondo más claro y cartas más pequeñas) ===== */
+#servicios {
+  background: linear-gradient(135deg, #0077cc 0%, #f0f4f8 100%);
+  padding: 6rem 1rem;
   text-align: center;
-  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+#servicios::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.12), transparent 70%);
+  transform: rotate(25deg);
+  pointer-events: none;
+}
+#servicios h2 {
   font-family: 'Times New Roman', Times, serif;
-  font-size: 40px;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(90deg, #ffffff, #e0e0e0, #ffffff);
+  background-size: 200% 100%;
+  background-clip: text;
+  color: white;
+  animation: shine 4s infinite;
 }
-.planes-grid {
+@keyframes shine {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.servicios-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
   margin: 0 auto;
+  z-index: 1;
 }
-.plan-card {
-  background: #fff;
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  padding: 2rem;
-  transition: transform 0.3s;
+
+.servicio-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.8rem 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 220px; /* altura fija para uniformidad */
 }
-.plan-card:hover {
-  transform: translateY(-5px);
+
+.servicio-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 90deg at center, #0077cc, #00bfff, #0077cc);
+  opacity: 0.25;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  z-index: -1;
 }
-.plan-card h3 {
-  text-align: center;
+
+.servicio-card img {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 1rem; /* centra horizontalmente */
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(0,119,204,0.6));
+  transition: transform 0.4s ease;
+}
+
+.servicio-card h3 {
+  font-size: 1.1rem;
+  color: #005fa3;
+  margin: 0;
+  transition: color 0.4s ease;
+}
+
+/* Hover effects */
+.servicio-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+.servicio-card:hover::before {
+  transform: rotate(45deg) scale(1.1);
+  opacity: 0.45;
+}
+.servicio-card:hover img {
+  transform: scale(1.15) rotate(10deg);
+}
+.servicio-card:hover h3 {
   color: #0077cc;
-  margin-bottom: 1rem;
-  font-size: 30px;
 }
-.plan-card .price {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+
+/* Responsivo: si en pantallas más angostas no caben, ajusta a 2x2 */
+@media (max-width: 1024px) {
+  .servicios-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-.plan-card ul {
-  list-style: disc inside;
-  margin-bottom: 1rem;
-}
-.plan-card blockquote {
-  font-style: italic;
-  color: #555;
-  text-align: center;
-}
+
 
 /* ===== Certificados ===== */
 #certificados {
@@ -374,6 +502,7 @@ section + section {
   margin-bottom: 2rem;
   font-family: 'Times New Roman', Times, serif;
   font-size: 40px;
+  color: 0077cc;
 }
 .certificados-grid {
   display: grid;
@@ -400,48 +529,107 @@ section + section {
   transform: scale(1.15);
 }
 
-/* ===== Testimonios ===== */
+/* ===== Testimonios (Más llamativo) ===== */
 #testimonios {
-  background: #f5f5f5;
+  position: relative;
+  background: linear-gradient(135deg, #0077cc 0%, #f0f4f8 100%);
+  padding: 6rem 1rem;
+  overflow: hidden;
+}
+#testimonios::before {
+  content: '“”';
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  font-size: 8rem;
+  color: rgba(22, 33, 248, 0.647);
+  transform: rotate(15deg);
+  font-family: serif;
+  pointer-events: none;
 }
 #testimonios h2 {
   text-align: center;
   margin-bottom: 2rem;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 40px;
+  font-size: 3rem;
+  background: linear-gradient(90deg, #0077cc, #00bcd4);
+  background-clip: text;
+  color: transparent;
+  position: relative;
 }
+#testimonios h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
 .testimonios-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-auto-rows: min-content;
   gap: 2rem;
   max-width: 1000px;
   margin: 0 auto;
+  z-index: 1;
 }
+
 .testimonial-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   display: flex;
   gap: 1rem;
-  background: #fff;
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  padding: 1.5rem;
+  align-items: flex-start;
+}
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 140%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(0,188,212,0.1), transparent 70%);
+  transform: rotate(-20deg);
+  z-index: -1;
 }
 .testimonial-card img {
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 50%;
+  border: 3px solid #00bcd4;
+  flex-shrink: 0;
+  transition: transform 0.4s ease;
+}
+.testimonial-content {
+  flex: 1;
 }
 .testimonial-content strong {
   display: block;
   margin-bottom: 0.5rem;
+  color: #0077cc;
+  font-size: 1.1rem;
+}
+.testimonial-content p {
+  color: #333;
+  line-height: 1.5;
+  font-style: italic;
 }
 
+/* Hover effects */
 .testimonial-card:hover {
-    transform: scaleY(1.1);
-    transform: scale(1.1);
-    transition: ease-in;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
+.testimonial-card:hover img {
+  transform: scale(1.1);
+}
+
 
 /* ===== Contacto ===== */
 #contacto {
@@ -451,7 +639,8 @@ section + section {
   text-align: center;
   margin-bottom: 2rem;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 40px;
+  font-size: 50px;
+  color: 0077cc;
 }
 .contact-card {
   background: #fff;
@@ -592,6 +781,153 @@ footer a:hover {
   }
 }
 
+/* ===== Navbar Ultra-Vibrante ===== */
+nav {
+  background: linear-gradient(90deg, #005fa3, #00bcd4, #005fa3);
+  background-size: 400% 100%;
+  animation: navGradient 8s ease infinite;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+@keyframes navGradient {
+  0%   { background-position: 0% 0; }
+  50%  { background-position: 100% 0; }
+  100% { background-position: 0% 0; }
+}
+.nav-links a {
+  color: #fff;
+  font-weight: 600;
+  padding: .5rem 0;
+  transition: color .3s, transform .3s;
+}
+.nav-links a:hover {
+  color: rgba(20, 0, 70, 0.667);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* ===== Home con Video Loop Watermark ===== */
+#home {
+  position: relative;
+  background: url('images/fondo.png') no-repeat center/cover;
+}
+
+
+/* ===== Sobre mí – Tarjetas Flotantes ===== */
+#sobre-mi {
+  background: linear-gradient(135deg, #f0faff, #ffffff);
+}
+.sobre-container {
+  gap: 3rem;
+}
+.sobre-img-card img {
+  border: 5px solid #00bcd4;
+  transform: rotate(-2deg);
+  transition: transform .6s ease;
+}
+.sobre-img-card img:hover {
+  transform: rotate(0) scale(1.05);
+}
+.sobre-content h2 {
+  color: #0077cc;
+  position: relative;
+}
+
+.stat-card {
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: transform .4s, box-shadow .4s;
+}
+.stat-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+
+/* ===== Proyectos – Tiles Interactivos ===== */
+#proyectos {
+  background: #e8faff;
+}
+.proyecto {
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  transition: transform .5s, box-shadow .5s;
+}
+.proyecto:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.2);
+}
+.proyecto iframe {
+  filter: contrast(1.2) brightness(1.1);
+}
+
+/* ===== Testimonios – Efecto Parallax ===== */
+#testimonios {
+  background: url('images/fondo-testimonios.png') center/cover fixed;
+}
+#testimonios h2 {
+  color: #0077cc;;
+}
+.testimonial-card {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(4px);
+  border: 2px solid #00bcd4;
+  transition: transform .4s, border-color .4s;
+}
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  border-color: #0077cc;
+}
+
+/* ===== Contacto – Formulario Glow ===== */
+#contacto {
+  background: linear-gradient(135deg, #ffffff, #e0f7ff);
+}
+.contact-card {
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+.contact-card input,
+.contact-card textarea {
+  border: 2px solid #00bcd4;
+  transition: border-color .3s, box-shadow .3s;
+}
+.contact-card input:focus,
+.contact-card textarea:focus {
+  border-color: #0077cc;
+  box-shadow: 0 0 12px rgba(0,123,255,0.4);
+}
+.contact-card button {
+  background: linear-gradient(90deg, #00bcd4, #0077cc);
+  box-shadow: 0 8px 20px rgba(0,188,212,0.5);
+  transition: transform .3s, box-shadow .3s;
+}
+.contact-card button:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 30px rgba(0,188,212,0.8);
+}
+
+/* ===== Footer – Slide & Glow ===== */
+footer {
+  background: #005fa3;
+  color: #e0f7ff;
+  padding: 2rem;
+  position: fixed;
+  bottom: 0; left: 0; width: 100%;
+  transform: translateY(100%);
+  transition: transform .6s ease, box-shadow .6s;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.2);
+}
+footer.visible {
+  transform: translateY(0);
+}
+footer a {
+  color: #ffffff;
+  transition: text-shadow .3s;
+}
+footer a:hover {
+  text-shadow: 0 0 8px rgba(255,255,255,0.7);
+}
+
+
 /* @media (max-width: 768px) {
   .nav-links { display: none; flex-direction: column; padding: 1rem; top: 60px; }
   .nav-links.show { display: flex; }
@@ -615,7 +951,7 @@ footer a:hover {
         <a href="#home" data-i18n="nav.home">Home</a>
         <a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a>
         <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
-        <a href="#precios" data-i18n="nav.pricing">Precios</a>
+        <a href="#servicios" data-i18n="nav.pricing">Servicios</a>
         <a href="#certificados" data-i18n="nav.certificates">Certificados</a>
         <a href="#testimonios" data-i18n="nav.testimonials">Testimonios</a>
         <a href="#contacto" data-i18n="nav.contact">Contacto</a>
@@ -683,56 +1019,36 @@ footer a:hover {
         <iframe src="https://www.youtube.com/embed/VEGxYEFk1rg" allowfullscreen></iframe>
       </div>
       <div class="proyecto">
-        <iframe src="https://www.youtube.com/embed/Ael-0zgH5AQ" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/6WlPHqyMsOI" allowfullscreen></iframe>
       </div>
     </div>
   </section>
 
-  <!-- Precios -->
-  <section id="precios">
-    <h2 data-i18n="pricing.title">Precios</h2>
-    <div class="planes-grid">
-      <div class="plan-card">
-        <h3 data-i18n="plan.basic.name">Básico</h3>
-        <div class="price">US $40/sem</div>
-        <ul>
-          <li data-i18n="plan.basic.item1">3 Reels dinámicos (15–60 seg)</li>
-          <li data-i18n="plan.basic.item2">1 Video largo (10–20 min) </li>
-          <li data-i18n="plan.basic.item3">Corrección de color básico y balance de audio </li>
-          <li data-i18n="plan.basic.item4">Música y efectos libres de derechos</li>
-          <li data-i18n="plan.basic.item5">Transiciones profesionales y subtítulos integrados</li>
-          <li data-i18n="plan.basic.item6">1 corrección gratuita</li>
-        </ul>
-        <blockquote data-i18n="plan.basic.tagline">*Ideal para creadores que buscan dar sus primeros pasos con profesionalismo*</blockquote>
-      </div>
-      <div class="plan-card popular">
-        <h3 data-i18n="plan.standard.name">Estándar</h3>
-        <div class="price">US $80/sem</div>
-        <ul>
-          <li data-i18n="plan.standard.item1">7 Reels de alto impacto (15–60 seg) </li>
-          <li data-i18n="plan.standard.item2">3 Videos largos (10–20 min)  </li>
-          <li data-i18n="plan.standard.item3">Color grading avanzado y motion graphics sencillos</li>
-          <li data-i18n="plan.standard.item4">Storyboard interactivo y guión basico</li>
-          <li data-i18n="plan.standard.item5">Entrega en varios formatos/aspect ratios</li>
-          <li data-i18n="plan.standard.item6">2 correcciones gratuitas</li>
-        </ul>
-        <blockquote data-i18n="plan.standard.tagline">*Para marcas que quieren escalar y mantener un flujo constante de contenidos.*</blockquote>
-      </div>
-      <div class="plan-card">
-        <h3 data-i18n="plan.premium.name">Premium</h3>
-        <div class="price">US $180/sem</div>
-        <ul>
-          <li data-i18n="plan.premium.item1">14 Reels creativos (15–60 seg)</li>
-          <li data-i18n="plan.premium.item2">7 Videos largos (10–20 min) </li>
-          <li data-i18n="plan.premium.item3">Storyboard interactivo y guion profesional</li>
-          <li data-i18n="plan.premium.item4">Color grading cinematográfico y mezcla de audio premium </li>
-          <li data-i18n="plan.premium.item5">Optimización de videos para motores de búsqueda </li>
-          <li data-i18n="plan.premium.item6">correcciones ilimitadas</li>
-        </ul>
-        <blockquote data-i18n="plan.premium.tagline">*El combo definitivo para lanzamientos, campañas y escalado rápido*</blockquote>
-      </div>
+ <!-- Servicios -->
+<!-- Servicios -->
+<section id="servicios">
+  <h2 data-i18n="services.title">Servicios</h2>
+  <div class="servicios-grid">
+    <div class="servicio-card">
+      <img src="images/videoedicion.png" alt="Edición de video">
+      <h3 data-i18n="services.video">Edición de video</h3>
     </div>
-  </section>
+    <div class="servicio-card">
+      <img src="images/motiongraphics.png" alt="Motion Graphics">
+      <h3 data-i18n="services.motion">Motion Graphics</h3>
+    </div>
+    <div class="servicio-card">
+      <img src="images/colorgrading.png" alt="Corrección de color">
+      <h3 data-i18n="services.color">Corrección de color</h3>
+    </div>
+    <div class="servicio-card">
+      <img src="images/sounddesign.png" alt="Diseño de sonido">
+      <h3 data-i18n="services.sound">Diseño de sonido</h3>
+    </div>
+  </div>
+</section>
+
+
 
   <!-- Certificados -->
   <section id="certificados">
@@ -846,7 +1162,7 @@ footer a:hover {
     <p data-i18n="footer.copy">&copy; 2025 Amesa Edits. Todos los derechos reservados.</p>
     <p>
         <a href="https://x.com/AllenWesa84512" data-i18n="footer.twitter">Twitter</a> |
-        <a href="https://www.linkedin.com/in/ariel-mesa-a3229b351"" data-i18n="footer.linkedin">LinkedIn</a> 
+        <a href="https://www.linkedin.com/in/ariel-mesa-a3229b351"" data-i18n="footer.linkedin">LinkedIn</a> |
         <a href="https://wa.me/19782377542" target="_blank" data-i18n="footer.whatsapp">WhatsApp</a> |
         <a href="https://t.me/amesaedits" target="_blank">Telegram</a>
     </p>
@@ -868,7 +1184,7 @@ footer a:hover {
         "nav.home": "Home",
         "nav.about": "Sobre mí",
         "nav.projects": "Proyectos",
-        "nav.pricing": "Precios",
+        "nav.pricing": "Servicios",
         "nav.certificates": "Certificados",
         "nav.testimonials": "Testimonios",
         "nav.contact": "Contacto",
@@ -881,32 +1197,7 @@ footer a:hover {
         "stat.years" : "Años",
         "stat.projects" : "Proyectos",
         "stat.support" : "Soporte",
-        "projects.title": "Proyectos",
-        "pricing.title": "Precios",
-        "plan.basic.name": "Básico",
-        "plan.basic.item1": "3 Reels dinámicos (15–60 seg)",
-        "plan.basic.item2": "1 Video largo",
-        "plan.basic.item3": "Corrección de color básico y balance de audio",
-        "plan.basic.item4": "Música y efectos libres de derechos",
-        "plan.basic.item5": "Transiciones profesionales y subtítulos integrados",
-        "plan.basic.item6": "1 corrección gratuita por video",
-        "plan.basic.tagline": "*Ideal para creadores que buscan dar sus primeros pasos con profesionalismo*",
-        "plan.standard.name": "Estándar",
-        "plan.standard.item1": "7 Reels de alto impacto (15–60 seg)",
-        "plan.standard.item2": "3 Videos largos (10–20 min)",
-        "plan.standard.item3": "Color grading avanzado y motion graphics sencillos",
-        "plan.standard.item4": "Storyboard interactivo y guión básico",
-        "plan.standard.item5": "Entrega en varios formatos/aspect ratios",
-        "plan.standard.item6": "2 correcciones gratuitas por video",
-        "plan.standard.tagline": "*Para marcas que quieren escalar y mantener un flujo constante de contenidos*",
-        "plan.premium.name": "Premium",
-        "plan.premium.item1": "14 Reels creativos (15–60 seg)",
-        "plan.premium.item2": "7 Videos largos (10–20 min)",
-        "plan.premium.item3": "Storyboard interactivo y guion profesional",
-        "plan.premium.item4": "Color grading cinematográfico y mezcla de audio premium",
-        "plan.premium.item5": "Optimización de videos para motores de búsqueda",
-        "plan.premium.item6": "Correcciones ilimitadas",
-        "plan.premium.tagline": "*El combo definitivo para lanzamientos, campañas y escalado rápido*",
+        "projects.title": "Proyectos",      
         "certificates.title": "Certificados",
         "testimonials.title": "Testimonios",
         "testimonial.1.name": "Marcos Rivas",
@@ -925,14 +1216,19 @@ footer a:hover {
         "footer.twitter": "Twitter",
         "footer.linkedin": "LinkedIn",
         "footer.instagram": "Instagram",
-        "footer.whatsapp": "WhatsApp"
+        "footer.whatsapp": "WhatsApp",
+        "services.title": "Servicios",
+        "services.video": "Edición de video",
+        "services.motion": "Motion Graphics",
+        "services.color": "Corrección de color",
+        "services.sound": "Diseño de sonido",
       },
       en: {
         "meta.title": "Video Editing Portfolio",
         "nav.home": "Home",
         "nav.about": "About Me",
         "nav.projects": "Projects",
-        "nav.pricing": "Pricing",
+        "nav.pricing": "Services",
         "nav.certificates": "Certificates",
         "nav.testimonials": "Testimonials",
         "nav.contact": "Contact",
@@ -945,32 +1241,7 @@ footer a:hover {
         "stat.years" : "Years",
         "stat.projects" : "Projects",
         "stat.support" : "Support",
-        "projects.title": "Projects",
-        "pricing.title": "Pricing",
-        "plan.basic.name": "Basic",
-        "plan.basic.item1": "3 dynamic reels (15–60 sec)",
-        "plan.basic.item2": "1 long video (10–20 min)",
-        "plan.basic.item3": "Basic color correction and audio balancing",
-        "plan.basic.item4": "Royalty-free music and sound effects",
-        "plan.basic.item5": "Professional transitions and integrated captions",
-        "plan.basic.item6": "1 free revision per video",
-        "plan.basic.tagline": "*Ideal for creators seeking to take their first steps with professionalism.*",
-        "plan.standard.name": "Standard",
-        "plan.standard.item1": "7 high-impact reels (15–60 sec)",
-        "plan.standard.item2": "3 long videos (10–20 min)",
-        "plan.standard.item3": "Advanced color grading and simple motion graphics",
-        "plan.standard.item4": "Interactive storyboard and basic script",
-        "plan.standard.item5": "Delivery in multiple formats/aspect ratios",
-        "plan.standard.item6": "2 free revisions per video",
-        "plan.standard.tagline": "*For brands that want to scale and maintain a steady content flow.*",
-        "plan.premium.name": "Premium",
-        "plan.premium.item1": "14 creative reels (15–60 sec)",
-        "plan.premium.item2": "7 long videos (10–20 min)",
-        "plan.premium.item3": "Interactive storyboard and professional script",
-        "plan.premium.item4": "Cinematic color grading and premium audio mixing",
-        "plan.premium.item5": "Video optimization for search engines",
-        "plan.premium.item6": "Unlimited revisions",
-        "plan.premium.tagline": "*The ultimate combo for launches, campaigns, and rapid scaling*",
+        "projects.title": "Projects",        
         "certificates.title": "Certificates",
         "testimonials.title": "Testimonials",
         "testimonial.1.name": "Marcos Rivas",
@@ -989,7 +1260,12 @@ footer a:hover {
         "footer.twitter": "Twitter",
         "footer.linkedin": "LinkedIn",
         "footer.instagram": "Instagram",
-        "footer.whatsapp": "WhatsApp"
+        "footer.whatsapp": "WhatsApp",
+        "services.title": "Services",
+        "services.video": "Video Editing",
+        "services.motion": "Motion Graphics",
+        "services.color": "Color Grading",
+        "services.sound": "Sound Design",
       }
     };
 
@@ -1086,7 +1362,11 @@ footer a:hover {
       })();
       </script>
       
-        
+      <script src="https://cdn.vercel-insights.com/v1/analytics.js"></script>
+<script>
+  VercelAnalytics.init();
+</script>
+
         
 
 </body>
